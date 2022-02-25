@@ -12,7 +12,7 @@
 
 # Установка
 Проект выходит для 2 самых популярных платформ -  Windows и Linux (Debian based).
-
+Скачать архив с программой можно [тут](https://github.com/Krypt0nC0R3/AliceMQTTHandler/releases)
 
 ## Windows
 Программа тестировалась на Windows 10 21H2.
