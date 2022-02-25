@@ -1,5 +1,5 @@
 # AliceMQTTHandler
-Прослойка для соединения проекта VVip-68 и "Домовенка Кузи"
+Прослойка для соединения проекта [VVip-68](https://github.com/vvip-68/GyverPanelWiFi) и ["Домовенка Кузи"](https://alexstar.ru/)
 # Оглавление
 1. Установка
     * Windows
