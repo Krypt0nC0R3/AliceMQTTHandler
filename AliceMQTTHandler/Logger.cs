@@ -8,8 +8,14 @@ namespace AliceMQTTHandler
 {
     static class Logger
     {
+        private static bool AllowMessages = true;
+        public static void ApplySettings(Settings settings)
+        {
+            AllowMessages = settings.Do_Output;
+        }
         public static void Message(string message)
         {
+            if (!AllowMessages) return;
             try
             {
                 Console.WriteLine($"[{DateTime.Now:dd.MM.yyyy HH.mm.ss:fff}] -> {message}");

@@ -15,6 +15,7 @@ namespace AliceMQTTHandler
         static MqttClient mqclient = null;
         static WebServer server;
         static LampStatus lamp = new();
+        static Version currentVersion = new("0.1.5");
         static void Main(string[] args)
         {
             try
@@ -29,6 +30,8 @@ namespace AliceMQTTHandler
                 sets = s;
                 server = new(sets.Web_Port, sets.Web_Path_Prefix, true);
                 server.OnClientAccepted += WebClientAccepted;
+                Logger.Message($"AliceMQTTHandler v{currentVersion} was loaded.");
+                Logger.ApplySettings(sets);
                 Logger.Message($"Webserver was loaded at {sets.Web_Port} port.");
                 mqclient = new(sets.MQTT_address);
                 string clientId = "AliceMQTTHandler-" + Guid.NewGuid().ToString();
@@ -115,7 +118,8 @@ namespace AliceMQTTHandler
                 {
                     JObject json = new();
                     string txt = lamp.Color.ToHexString().Replace("#", "");
-                    json.Add("value",Convert.ToInt32(txt,16));
+                    int val = Convert.ToInt32(txt, 16);
+                    json.Add("value",val);
                     result = json.ToString();
                 }
 
@@ -147,19 +151,17 @@ namespace AliceMQTTHandler
 
                 if (s_url.StartsWith("seteffect"))
                 {
-                    string state = s_url.Replace("seteffect/", "");
-                    mqclient.Publish(CombinePath(sets.MQTT_Path, "cmd"), Encoding.UTF8.GetBytes($"8 0 {state};$16 1;$16 5 1;"), uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+                    //string state = s_url.Replace("seteffect/", "");
+                    mqclient.Publish(CombinePath(sets.MQTT_Path, "cmd"), Encoding.UTF8.GetBytes($"16 3;$16 1;$16 5 1;"), uPLibrary.Networking.M2Mqtt.Messages.MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
                 }
                 if (s_url.StartsWith("geteffect"))
                 {
                     JObject json = new();
-                    int ef = lamp.Effect;
-                    if (ef > 42) ef = 42;
-                    json.Add("value", ef);
+                    json.Add("value", 4500);
                     result = json.ToString();
                 }
 
-                Logger.Message($"Request accepted at {url}");
+                //Logger.Message($"Request accepted at {url}");
                 return result;
             }
             else
