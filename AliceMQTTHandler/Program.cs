@@ -29,6 +29,7 @@ namespace AliceMQTTHandler
                 sets = s;
                 server = new(sets.Web_Port, sets.Web_Path_Prefix, true);
                 server.OnClientAccepted += WebClientAccepted;
+                Logger.ApplySettings(sets);
                 Logger.Message($"Webserver was loaded at {sets.Web_Port} port.");
                 mqclient = new(sets.MQTT_address);
                 string clientId = "AliceMQTTHandler-" + Guid.NewGuid().ToString();
