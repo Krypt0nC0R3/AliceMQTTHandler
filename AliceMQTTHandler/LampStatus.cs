@@ -10,7 +10,7 @@ namespace AliceMQTTHandler
     public class LampStatus
     {
         public bool IsOn { get; set; } = false;
-        public Color Color { get; set; } = Color.White;
+        public Color Color { get; set; } = Color.Black;
         public ushort Brightness { get; set; } = 0;
         public int BrightnessInPercent { get
             {

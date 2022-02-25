@@ -118,7 +118,8 @@ namespace AliceMQTTHandler
                 {
                     JObject json = new();
                     string txt = lamp.Color.ToHexString().Replace("#", "");
-                    json.Add("value",Convert.ToInt32(txt,16));
+                    int val = Convert.ToInt32(txt, 16);
+                    json.Add("value",val);
                     result = json.ToString();
                 }
 
@@ -160,7 +161,7 @@ namespace AliceMQTTHandler
                     result = json.ToString();
                 }
 
-                Logger.Message($"Request accepted at {url}");
+                //Logger.Message($"Request accepted at {url}");
                 return result;
             }
             else
