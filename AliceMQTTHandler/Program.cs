@@ -15,7 +15,7 @@ namespace AliceMQTTHandler
         static MqttClient mqclient = null;
         static WebServer server;
         static LampStatus lamp = new();
-        static Version currentVersion = new("0.1.5");
+        static Version currentVersion = new("0.1.7");
         static void Main(string[] args)
         {
             try
@@ -82,7 +82,7 @@ namespace AliceMQTTHandler
                 Logger.Message($"MQTT client connected to {sets.MQTT_address} with \"{clientId}\" id.");
                 while (true)
                 {
-                    Thread.Sleep(10);
+                    Thread.Sleep(100);
                 }
             }
             catch (Exception e)
