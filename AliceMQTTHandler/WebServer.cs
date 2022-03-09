@@ -56,6 +56,7 @@ namespace AliceMQTTHandler
                     Logger.Error(e);
                     //enabled = false;
                 }
+                Thread.Sleep(10);
             }
         }
 
